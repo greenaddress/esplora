@@ -22,18 +22,18 @@ SHELL ["/bin/bash", "-c"]
 # required to run some scripts as root (needed for docker)
 RUN source /root/.nvm/nvm.sh \
  && npm config set unsafe-perm true \
- && npm install && cd prerender-server && npm run dist && cd .. \
- && NOSCRIPT_REDIR=1 DEST=/srv/explorer/static/bitcoin-mainnet \
+ && npm install && (cd prerender-server && npm run dist) \
+ && DEST=/srv/explorer/static/bitcoin-mainnet \
     npm run dist -- bitcoin-mainnet \
- && NOSCRIPT_REDIR=1 DEST=/srv/explorer/static/bitcoin-testnet \
+ && DEST=/srv/explorer/static/bitcoin-testnet \
     npm run dist -- bitcoin-testnet \
- && NOSCRIPT_REDIR=1 DEST=/srv/explorer/static/liquid-mainnet \
+ && DEST=/srv/explorer/static/liquid-mainnet \
     npm run dist -- liquid-mainnet \
- && NOSCRIPT_REDIR=1 DEST=/srv/explorer/static/bitcoin-mainnet-blockstream \
+ && DEST=/srv/explorer/static/bitcoin-mainnet-blockstream \
     npm run dist -- bitcoin-mainnet blockstream \
- && NOSCRIPT_REDIR=1 DEST=/srv/explorer/static/bitcoin-testnet-blockstream \
+ && DEST=/srv/explorer/static/bitcoin-testnet-blockstream \
     npm run dist -- bitcoin-testnet blockstream \
- && NOSCRIPT_REDIR=1 DEST=/srv/explorer/static/liquid-mainnet-blockstream \
+ && DEST=/srv/explorer/static/liquid-mainnet-blockstream \
     npm run dist -- liquid-mainnet blockstream
 
 # configuration
